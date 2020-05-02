@@ -22,7 +22,7 @@ class Box extends React.Component{
 class Grid extends React.Component {
 
     render() {
-        const width = (this.props.cols * 16) + 1;
+        const width = (this.props.cols * 31) + 1;
         var rowsArr = []
          var boxClass = "";
         
@@ -86,7 +86,7 @@ class Main extends React.Component {
     seed = () => {
         let grid = JSON.parse(JSON.stringify(this.state.gridFull))
         for (let i = 0; i < this.rows; i++){
-            for(let j = 0; j < this.rows; j++){
+            for(let j = 0; j < this.cols; j++){
                 //random number between 0 and 4, if 1 then: 
                 let random = Math.floor(Math.random() * 4);
                 if(random === 1) {
