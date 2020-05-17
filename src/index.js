@@ -7,12 +7,19 @@ class Box extends React.Component{
     selectBox = () => {
         this.props.selectBox(this.props.row, this.props.col)
     }
+    
+    checkThenSelectBox = (e) => {
+        e.preventDefault()
+        if (e.buttons === 1) this.props.selectBox(this.props.row, this.props.col)
+    }
     render() {
         return(
             <div
                 className={this.props.boxClass}
                 id={this.props.id}
+                draggable={false}
                 onClick={this.selectBox}
+                onMouseMove={this.checkThenSelectBox}
             />
         )
     }
@@ -146,20 +153,19 @@ class Main extends React.Component {
         // Make sure we are not on the last column
         if (ncol + 1 < cols) {
             
-            //Check right neighbor
+            //Check right neighbour
             if (currGen[nrow][ncol + 1] === true) count++;
         }
 
         // Make sure we are not on the bottom left corner
         if (nrow + 1 < rows && ncol - 1 >= 0) {
-            //Check bottom left neighbor
+            //Check bottom left neighbour
             if (currGen[nrow + 1][ncol - 1] === true) count++;
         }
 
         // Make sure we are not on the bottom right
         if (nrow + 1 < rows && ncol + 1 < cols) {
-            //Check bottom right neighbor
-            if (ncol==0 && nrow==0) console.log(`bottom right = ${nrow + 1},${ncol +1} = ${currGen[nrow + 1][ncol + 1]}`)
+            //Check bottom right neighbour
 
             if (currGen[nrow + 1][ncol + 1] === true) count++;
         }
@@ -167,7 +173,7 @@ class Main extends React.Component {
         
         // Make sure we are not on the last row
         if (nrow + 1 < rows) {
-            //Check bottom neighbor
+            //Check bottom neighbour
             if (currGen[nrow + 1][ncol] === true) count++;
         }
         
